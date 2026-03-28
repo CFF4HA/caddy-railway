@@ -10,3 +10,5 @@ FROM caddy:alpine
 COPY --from=builder /usr/local/bin/caddy-custom /usr/bin/caddy
 COPY ./www /www
 COPY ./Caddyfile /etc/caddy/Caddyfile
+
+EXPOSE 80
