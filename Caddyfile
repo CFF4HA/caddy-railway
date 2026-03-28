@@ -4,12 +4,19 @@
 
 # Remember, Railway terminates TLS before it gets to Caddy.
 {
-  debug
-  http_port 80
-  auto_https off
+    # Railway terminates SSL at the edge
+    auto_https off
 }
 
-http://* {
-  reverse_proxy /api/* {$BACKEND_URL}
-  reverse_proxy {$FRONTEND_URL}
+# Bind to the dynamic port provided by Railway
+:{$PORT} {
+    # Strip /api and proxy to backend
+    handle_path /api/* {
+        reverse_proxy {$BACKEND_URL}
+    }
+
+    # Proxy everything else to the Go frontend
+    handle {
+        reverse_proxy {$FRONTEND_URL}
+    }
 }
