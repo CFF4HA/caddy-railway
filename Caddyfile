@@ -3,7 +3,13 @@
 # Edit this file according to your needs.
 
 # Remember, Railway terminates TLS before it gets to Caddy.
-:80 
+{
+  debug
+  http_port 80
+  auto_https off
+}
 
-reverse_proxy /api/* {$BACKEND_URL}
-reverse_proxy {$FRONTEND_URL}
+http://* {
+  reverse_proxy /api/* {$BACKEND_URL}
+  reverse_proxy {$FRONTEND_URL}
+}
