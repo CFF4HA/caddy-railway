@@ -3,7 +3,5 @@
 # Edit this file according to your needs.
 
 # Remember, Railway terminates TLS before it gets to Caddy.
-staircase.godiegogo.me {
-  reverse_proxy /api/* {$BACKEND_URL}
-  reverse_proxy {$FRONTEND_URL}
-}
+reverse_proxy /api/* {$BACKEND_URL}
+reverse_proxy {$FRONTEND_URL}
